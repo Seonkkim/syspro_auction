@@ -9,8 +9,6 @@ typedef struct _ThrInfo {
 } ThrInfo;
 
 int conn(int argc, char *argv[]);
-void *controller(void *ptr);	// 미완성
-void start_game(int sock);	// 미완성
 void send_ints(int sock, int *host_arr, int arr_len);
 void recv_ints(int sock, int *host_arr, int arr_len);
 void send_int(int sock, int host_int);
@@ -103,21 +101,6 @@ int conn(int argc, char *argv[])
 
 	return sock;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* data통신(read/write)을 쉽게 하려고 미리 작성한 함수*/
 
