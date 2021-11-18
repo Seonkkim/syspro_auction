@@ -13,7 +13,7 @@ void send_ints(int sock, int *host_arr, int arr_len);
 void recv_ints(int sock, int *host_arr, int arr_len);
 void send_int(int sock, int host_int);
 int recv_int(int sock);
-
+void *controller(void *ptr);
 int sock;
 
 int main(int argc, char *argv[])
@@ -50,7 +50,7 @@ void start(int sock)
 
 	while (running) {
 		system("clear");
-		# do what you want
+		//do what you want
 		running = recv_int(sock);
 	}
 
@@ -127,6 +127,11 @@ void send_int(int sock, int host_int)
 	int net_int = htons(host_int);
 	if (write(sock, &net_int, sizeof(int)) < 0)
 		perror("Writing to socket error");
+}
+
+void *controller(void *ptr){
+	// to do
+	return NULL;
 }
 
 int recv_int(int sock)

@@ -65,7 +65,7 @@ int main(int argc, char *argv[])
 void *input_test(void *ptr)
 {
 	Clnt clnt = *(Clnt *)ptr;
-	while (1)
+	while (1){
 	
 		clnt.num_test = recv_int(clnt.sock);
 		printf("클라이언트%d로부터 (%d) 확인\n", clnt.id, clnt.num_test);
