@@ -1,74 +1,121 @@
 #include "includes.h"	// start, conn은 수정없이 사용
-#define BUFSIZE 1024
-#define PORT_NUM 50000
+
+#define PORT_NUM 3000
 #define NAMESIZE 32
+#define MAX_MSG_LEN 1024
 
 typedef struct _Clnt {
 	int sock;
 	char name[NAMESIZE];
-	int num_test;
 	int id;
-	int new_val;
+	char msg[MAX_MSG_LEN];
+	int state;
 } Clnt;
 
 typedef struct _Thr {
 	Clnt *clnts;
+	int n_clnts;
 } Thr;
 
 int start_server(int argc, char *arg);
+void send_chars(int sock, char *host_arr);
+char *recv_chars(int sock);
 void conn(int serv_sock, Clnt *clnts, int n_clnts);
 void send_ints(int sock, int *host_arr, int arr_len);
 void recv_ints(int sock, int *host_arr, int arr_len);
 void send_int(int sock, int host_int);
 int recv_int(int sock);
 
-void *input_test(void *ptr);
+void *controller(void *ptr);
 
 int main(int argc, char *argv[])
 {
 	int serv_sock = start_server(argc, argv[0]);
-	
+
 	int n_clnts = atoi(argv[1]);
 	Clnt clnts[n_clnts];
-	conn(serv_sock, clnts, n_clnts);
-
+	conn(serv_sock, clnts, n_clnts); // connect success
 	pthread_t threads[n_clnts];
-
+	Thr THREAD;
+	THREAD.clnts = (Clnt *)malloc(sizeof(Clnt) * n_clnts);
+	THREAD.n_clnts = n_clnts;
+	THREAD.clnts = clnts;
 	for (int i = 0; i < n_clnts; i++) {
+		THREAD.clnts[i].id = i;
+		THREAD.clnts[i].state = 1;
+		strcpy(THREAD.clnts[i].msg,"\0");
 
-		/*
-		while (1) {
+	}
+	////////////////////////////////////////////////
+	for (int i = 0; i < n_clnts; i++) {
+		send_int(THREAD.clnts[i].sock, n_clnts);
+		send_int(THREAD.clnts[i].sock, i);	// clnt thr에 id전달
 
-			clnts[i].num_test = recv_int(clnts[i].sock);
-			
-			//for (int j = 0; j < n_clnts; j++) {
-			//	send_int(clnts[j].sock, clnts[i].num_test);
+		for (int j = 0; j < n_clnts; j++) {
+			if (write(THREAD.clnts[i].sock, clnts[j].name, NAMESIZE) < 0)
+				perror("Writing to socket error");
+		}
+
+	}
+	for (int i = 0; i < n_clnts; i++) {
+		if (pthread_create(&threads[i], NULL, controller, &THREAD.clnts[i])) {
+			fprintf(stderr, "Creating thread error...\n");
+			exit(1);
+		}
+	}
+
+	sleep(1);
+	while (1)
+	{
+		for (int i = 0; i < n_clnts; i++)
+        {
+            //memset(THREAD.clnts[j].msg, 0x00, MAX_MSG_LEN);
+            //printf("thread: %s",THREAD.clnts[j].msg);
+            if(strcmp(&THREAD.clnts[i].msg[0],"\0")) {
+                //printf("%s",THREAD.clnts[j].msg);
+                send_chars(THREAD.clnts[i].sock, THREAD.clnts[i].msg);
+                printf("id %s said, %s\n", THREAD.clnts[i].name, THREAD.clnts[i].msg);
+                //strcpy(&THREAD.clnts[j].msg[0],"\0");
+            }
+
+
 			}
-		
-		input_test(&clnts[i]);
-		*/
+        for (int i = 0; i <n_clnts; i++) {
+            memset(THREAD.clnts[i].msg, 0x00, MAX_MSG_LEN);
+            sleep(0.01);
+        }
 
-		pthread_create(&threads[i], NULL, input_test, &clnts[i]);
-	}
+		}
+		usleep(120000);	// 삐걱임 제거
+		//printf("choose what you want: \n");
 
-	for (int i = 0; i < n_clnts; i++) {
-		pthread_join(threads[i], NULL);
-	}
-
-	/*close(serv_sock);
+		for (int i = 0; i <n_clnts; i++) {
+            memset(THREAD.clnts[i].msg, 0x00, MAX_MSG_LEN);
+        sleep(0.01);
+		}
+	///////////////////////////////////////////
+	close(serv_sock);
 	for (int i = 0; i < n_clnts; i++)
 		close(clnts[i].sock);
-	*/
+
+	free(THREAD.clnts);
 	return 0;
+	///////////////////////////////////////////
 }
 
-void *input_test(void *ptr)
+void *controller(void *ptr)
 {
-	Clnt clnt = *(Clnt *)ptr;
-	while (1){
-	
-		clnt.num_test = recv_int(clnt.sock);
-		printf("클라이언트%d로부터 (%d) 확인\n", clnt.id, clnt.num_test);
+	//Clnt clnt = *(Clnt *)ptr;
+	while (1)
+	{
+        if(strcmp((*(Clnt *)ptr).msg,"exit") != 0){
+            //printf("%s", recv_chars(clnt.sock));
+            strcpy((*(Clnt *)ptr).msg, recv_chars((*(Clnt *)ptr).sock));
+            printf("client %d <%s> (%s)\n", (*(Clnt *)ptr).id, (*(Clnt *)ptr).name, (*(Clnt *)ptr).msg);
+
+        }
+     //printf("클라이언트%d <%s>로부터 (%s) 확인\n", clnt.id, clnt.name, clnt.msg);
+
 	}
 
 	return NULL;
@@ -106,22 +153,21 @@ int start_server(int argc, char *arg)	// 오류처리 포함
 	return serv_sock;
 }
 
-//clnt_sock, clnts, n_clnts
 void conn(int serv_sock, Clnt *clnts, int n_clnts)
 {
 	int clnt_sock;
 	struct sockaddr_in clnt_addr;
-	int clnt_addr_size = sizeof(clnt_addr);
+	socklen_t clnt_addr_size = sizeof(clnt_addr);
 	printf("Waiting for %d clients...\n", n_clnts);
 
-	for (int i = 0; i < n_clnts; i++) { /* 접속된 client 별 thread 생성하여 detach */
+	for (int i = 0; i < n_clnts; i++) {
 		clnt_sock = accept(serv_sock, (struct sockaddr *)&clnt_addr, &clnt_addr_size);
 		if (clnt_sock == -1) {
 			perror("accept() error"); exit(1);
 		}
 		//printf("Connection from: %s:%d\n", inet_ntoa(clnt_addr.sin_addr), ntohs(clnt_addr.sin_port));
 
-		clnts[i].sock = clnt_sock;		
+		clnts[i].sock = clnt_sock;
 
 		// read client name
 		if (read(clnts[i].sock, clnts[i].name, NAMESIZE - 1) < 0)
@@ -131,20 +177,13 @@ void conn(int serv_sock, Clnt *clnts, int n_clnts)
 		clnts[i].id = i + 1; // id 추가
 		printf("Client #%d '%s' connected\n", clnts[i].id, clnts[i].name);
 
-		/////////////////////////////////////////////
-		// 접속할 때 마다 유저 count. 수학적 장난(?)이 포함.
 		send_int(clnts[i].sock, n_clnts);	// m at clnt
 		//printf("%d\n", i); debug
 		for (int j = 0; j <= i; j++)
 			send_int(clnts[j].sock, i+1);	// n at clnt
-		/////////////////////////////////////////////
 	}
 	printf("\n");
-
-	return 0;
 }
-
-
 /* data통신(read/write)을 쉽게 하려고 미리 작성한 함수*/
 
 void send_ints(int sock, int *host_arr, int arr_len)
@@ -180,4 +219,15 @@ int recv_int(int sock)
 	host_int = ntohs(net_int);	// 엔디언 방식 차이
 
 	return host_int;
+}
+
+void send_chars(int sock, char *host_arr){
+	if (write(sock, host_arr, sizeof(char) * MAX_MSG_LEN) < 0)
+		perror("Writing to socket error");
+}
+char *recv_chars(int sock){
+	static char host_arr[MAX_MSG_LEN] = "";
+	if (read(sock, host_arr, sizeof(char) * MAX_MSG_LEN) < 0)
+		perror("Reading from socket error");
+	return host_arr;
 }

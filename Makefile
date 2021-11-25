@@ -7,8 +7,9 @@ RM = /bin/rm -f
 INC = 
 LIBS = 
 CFLAGS = -D_REENTRANT -pthread -g -w -Wall -std=c99
+
 EXESRCS = client.c
-EXESRCS2 =server.c 
+EXESRCS2 = server.c 
 
 LIBOBJS = ${LIBSRC:.c=.o}
 OBJECTS2 = ${EXESRCS2:.c=.o}
