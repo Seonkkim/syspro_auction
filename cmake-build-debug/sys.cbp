@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="sys"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/sunkk97/CLionProjects/sys/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j2 -f &quot;/home/sunkk97/CLionProjects/sys/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j2 -f &quot;/home/sunkk97/CLionProjects/sys/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j2 -f &quot;/home/sunkk97/CLionProjects/sys/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j2 -f &quot;/home/sunkk97/CLionProjects/sys/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/sunkk97/CLionProjects/sys/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j2 -f &quot;/home/sunkk97/CLionProjects/sys/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j2 -f &quot;/home/sunkk97/CLionProjects/sys/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j2 -f &quot;/home/sunkk97/CLionProjects/sys/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j2 -f &quot;/home/sunkk97/CLionProjects/sys/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="s">
+				<Option output="/home/sunkk97/CLionProjects/sys/cmake-build-debug/s" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/sunkk97/CLionProjects/sys/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j2 -f &quot;/home/sunkk97/CLionProjects/sys/cmake-build-debug/Makefile&quot;  VERBOSE=1 s"/>
+					<CompileFile command="/usr/bin/make -j2 -f &quot;/home/sunkk97/CLionProjects/sys/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j2 -f &quot;/home/sunkk97/CLionProjects/sys/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j2 -f &quot;/home/sunkk97/CLionProjects/sys/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="s/fast">
+				<Option output="/home/sunkk97/CLionProjects/sys/cmake-build-debug/s" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/sunkk97/CLionProjects/sys/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j2 -f &quot;/home/sunkk97/CLionProjects/sys/cmake-build-debug/Makefile&quot;  VERBOSE=1 s/fast"/>
+					<CompileFile command="/usr/bin/make -j2 -f &quot;/home/sunkk97/CLionProjects/sys/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j2 -f &quot;/home/sunkk97/CLionProjects/sys/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j2 -f &quot;/home/sunkk97/CLionProjects/sys/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="c1">
+				<Option output="/home/sunkk97/CLionProjects/sys/cmake-build-debug/c1" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/sunkk97/CLionProjects/sys/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j2 -f &quot;/home/sunkk97/CLionProjects/sys/cmake-build-debug/Makefile&quot;  VERBOSE=1 c1"/>
+					<CompileFile command="/usr/bin/make -j2 -f &quot;/home/sunkk97/CLionProjects/sys/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j2 -f &quot;/home/sunkk97/CLionProjects/sys/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j2 -f &quot;/home/sunkk97/CLionProjects/sys/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="c1/fast">
+				<Option output="/home/sunkk97/CLionProjects/sys/cmake-build-debug/c1" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/sunkk97/CLionProjects/sys/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j2 -f &quot;/home/sunkk97/CLionProjects/sys/cmake-build-debug/Makefile&quot;  VERBOSE=1 c1/fast"/>
+					<CompileFile command="/usr/bin/make -j2 -f &quot;/home/sunkk97/CLionProjects/sys/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j2 -f &quot;/home/sunkk97/CLionProjects/sys/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j2 -f &quot;/home/sunkk97/CLionProjects/sys/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="c2">
+				<Option output="/home/sunkk97/CLionProjects/sys/cmake-build-debug/c2" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/sunkk97/CLionProjects/sys/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j2 -f &quot;/home/sunkk97/CLionProjects/sys/cmake-build-debug/Makefile&quot;  VERBOSE=1 c2"/>
+					<CompileFile command="/usr/bin/make -j2 -f &quot;/home/sunkk97/CLionProjects/sys/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j2 -f &quot;/home/sunkk97/CLionProjects/sys/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j2 -f &quot;/home/sunkk97/CLionProjects/sys/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="c2/fast">
+				<Option output="/home/sunkk97/CLionProjects/sys/cmake-build-debug/c2" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/sunkk97/CLionProjects/sys/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j2 -f &quot;/home/sunkk97/CLionProjects/sys/cmake-build-debug/Makefile&quot;  VERBOSE=1 c2/fast"/>
+					<CompileFile command="/usr/bin/make -j2 -f &quot;/home/sunkk97/CLionProjects/sys/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j2 -f &quot;/home/sunkk97/CLionProjects/sys/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j2 -f &quot;/home/sunkk97/CLionProjects/sys/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/sunkk97/CLionProjects/sys/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j2 -f &quot;/home/sunkk97/CLionProjects/sys/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j2 -f &quot;/home/sunkk97/CLionProjects/sys/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j2 -f &quot;/home/sunkk97/CLionProjects/sys/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j2 -f &quot;/home/sunkk97/CLionProjects/sys/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/sunkk97/CLionProjects/sys/client1.c">
+			<Option target="c1"/>
+			<Option target="c2"/>
+		</Unit>
+		<Unit filename="/home/sunkk97/CLionProjects/sys/server.c">
+			<Option target="s"/>
+		</Unit>
+		<Unit filename="/home/sunkk97/CLionProjects/sys/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

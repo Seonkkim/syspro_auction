@@ -1,0 +1,5 @@
+/home/sunkk97/CLionProjects/sys/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/sunkk97/CLionProjects/sys/cmake-build-debug/CMakeFiles/s.dir
+/home/sunkk97/CLionProjects/sys/cmake-build-debug/CMakeFiles/c1.dir
+/home/sunkk97/CLionProjects/sys/cmake-build-debug/CMakeFiles/c2.dir
+/home/sunkk97/CLionProjects/sys/cmake-build-debug/CMakeFiles/edit_cache.dir

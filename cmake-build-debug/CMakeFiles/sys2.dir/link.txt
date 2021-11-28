@@ -1,0 +1,1 @@
+/usr/bin/gcc  -pthread -g CMakeFiles/sys2.dir/client.c.o -o sys2 

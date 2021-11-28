@@ -1,0 +1,1 @@
+/usr/bin/gcc -pthread -g CMakeFiles/c1.dir/client1.c.o -o c1 
