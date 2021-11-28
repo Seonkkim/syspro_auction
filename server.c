@@ -1,5 +1,5 @@
 #include "includes.h"	// start, conn은 수정없이 사용
-
+#define MAX_PATH_LEN 2048
 #define PORT_NUM 3000
 #define NAMESIZE 32
 #define MAX_MSG_LEN 1024
@@ -11,7 +11,7 @@ typedef struct{
 
 typedef struct{
 	int sock;
-	char name[NAMESIZE];
+    char name[NAMESIZE];
 	int id;
 	char msg[MAX_MSG_LEN];
     char pw[NAMESIZE];
@@ -31,7 +31,7 @@ char *recv_chars(int sock);
 void conn(int serv_sock, Clnt *clnts, int n_clnts);
 void send_int(int sock, int host_int);
 int recv_int(int sock);
-void process_login(int sock, Clnt clnt);
+void process_login(int sock, Clnt clnt, char* name);
 void savein_db(char *d_add, Clnt clnt);
 void *controller(void *ptr);
 
@@ -182,13 +182,12 @@ void conn(int serv_sock, Clnt *clnts, int n_clnts)
 		// read client name
 		if (read(clnts[i].sock, clnts[i].name, NAMESIZE - 1) < 0)
 			perror("Reading from socket error");
-        send_int(clnts[i].sock, 1); // read success
+
 
 		clnts[i].name[NAMESIZE - 1] = '\0';
 		clnts[i].id = i + 1; // id 추가
-        strcpy(clnts[i].pw,"1234");
 
-        process_login(clnts[i].sock, clnts[i]);
+        process_login(clnts[i].sock, clnts[i], clnts[i].name);
 
 		printf("Client #%d '%s' connected\n", clnts[i].id, clnts[i].name);
 
@@ -228,18 +227,57 @@ char *recv_chars(int sock){
 		perror("Reading from socket error");
 	return host_arr;
 }
-void process_login(int sock, Clnt clnt){
+void process_login(int sock, Clnt clnt, char* name){
+    FILE *fp;
+    char cwd[MAX_PATH_LEN];
+    getcwd(cwd, MAX_PATH_LEN);
+    strcat(cwd,"/");
+    strcat(cwd,name);
+    char tmp[NAMESIZE];
+    Clnt info;
+    fp = fopen(name,"rb");
+    if(fp == NULL){
+        //fclose(fp);
 
-    char* tmp = recv_chars(sock);
+        send_int(sock,1);
 
-    if(!strcmp(clnt.pw, tmp)){
+        strcpy(tmp,recv_chars(sock));
+        printf("%s",tmp);
+        strcpy(&info.name, name);
+        //printf("%s",info.name);
+        strcpy(&info.pw, tmp);
+
+        if((fp = fopen(name,"wb"))<0) {
+            perror("fail to write open\n");
+            exit(1);
+        }
+
+        if(fwrite(&info,sizeof(info),1,fp)<0){
+            perror("fwrite"); return;
+        }
+        fclose(fp);
         send_int(sock,3);
-        printf("pw right, login success\n");
+        printf("Success create new account, login \n");
     }
     else{
-        send_int(sock,0);
-        printf("pw wrong\n");
+        send_int(sock, 0);
+        if(!fread(&info,sizeof(info),1,fp)){
+            perror("fread"); return;
+        }
+        char *info_pw = info.pw;
+        strcpy(&tmp[0],recv_chars(sock));
+        if(!strcmp(&info_pw[0], tmp)){
+            send_int(sock,3);
+            printf("pw right, login success\n");
+        }
+        else{
+            send_int(sock,0);
+            printf("pw wrong\n");
+        }
+        fclose(fp);
     }
+
+
 }
 void savein_db(char *d_add, Clnt clnt){
     int fd;

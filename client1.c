@@ -14,7 +14,7 @@ int recv_int(int sock);
 void send_chars(int sock, char *host_arr);
 const char *recv_chars(int sock);
 int sock;
-void request_login(int sock);
+void request_login(int sock, int new_Account);
 int main(int argc, char *argv[]) {
     char cwd[MAX_PATH_LEN];
     getcwd(cwd, MAX_PATH_LEN);
@@ -140,7 +140,7 @@ int conn(int argc, char *argv[])
     if (write(sock, name, NAMESIZE - 1) < 0)
         perror("Writing to socket error");
     //printf("%d", recv_int(sock));
-    if(recv_int(sock)) request_login(sock);
+     request_login(sock,recv_int(sock)); // is id exist? or not
     // 다른 클라이언트 접속 대기
     m = recv_int(sock);	n = recv_int(sock);
     printf("%d/%d clients connected\n", n, m);
@@ -155,18 +155,38 @@ int conn(int argc, char *argv[])
     return sock;
 }
 
-void request_login(int sock){
-    int login_num = 9;
+void request_login(int sock, int new_Account){
 
     char pw[NAMESIZE];
-    printf("--------------------------\n");
-    printf("PW: ");
-    scanf("%s",pw);
-    printf("\n");
-    send_chars(sock, &pw[0]);
-    if(recv_int(sock) != 3){
-        printf("Wrong pw");
-        exit(1);
+    int tmp;
+    if(new_Account){
+        printf("you are new! enter your new account password: ");
+        scanf("%s", pw);
+        printf("\n");
+        /*
+        if (write(sock, pw, NAMESIZE) < 0)
+            perror("Writing to socket error");
+            */
+        send_chars(sock, pw);
+        //sleep(5);
+
+        tmp = recv_int(sock);
+        if(tmp!= 3){
+            printf("create Account err");
+            exit(1);
+        }
+    }
+    else{
+        printf("--------------------------\n");
+        printf("PW: ");
+        scanf("%s",pw);
+        printf("\n");
+        send_chars(sock, &pw[0]);
+        sleep(1);
+        if(recv_int(sock) != 3){
+            printf("Wrong pw");
+            exit(1);
+        }
     }
 }
 
@@ -189,10 +209,11 @@ int recv_int(int sock)
     return host_int;
 }
 
-void send_chars(int sock, char *host_arr){
+void send_chars(int sock, char host_arr[]){
     if (write(sock, host_arr, sizeof(char) * MAX_MSG_LEN) < 0)
         perror("Writing to socket error");
-    //printf("wrk");
+    printf("wrk\n");
+    printf("%s",host_arr);
 }
 const char* recv_chars(int sock){
     static char host_arr[MAX_MSG_LEN] = "";
