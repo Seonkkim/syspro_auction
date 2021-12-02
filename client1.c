@@ -45,14 +45,12 @@ int main(int argc, char *argv[]) {
         //pscores[i] = recv_int(sock);
         pnames[i] = (char *) malloc(sizeof(char) * NAMESIZE);
         pmsg[i] = (char *) malloc(sizeof(char) * MAX_MSG_LEN);
-        if (read(sock, pnames[i], NAMESIZE) < 0)
+        if (read(sock, &pnames[i][0], NAMESIZE) < 0)
             perror("Reading from socket error");
         printf("pname is %s\n", pnames[i]);
     }
 
     while (1) {
-        for(int i = 0; i<n_clnts;i++)
-            printf("%s",pnames[i]);
         //state = recv_int(sock); //종료 체크
         for (int i = 0; i < n_clnts; i++) {
             /*pstate[i] = recv_int(sock);
@@ -62,7 +60,7 @@ int main(int argc, char *argv[]) {
             printf("\n");
             //printf("name: %s\n",pnames[i]);
             //printf("return %s\n", recv_chars(sock));
-            //strcpy(&pnames[i][0], recv_chars(sock));
+            strcpy(&pnames[i][0], recv_chars(sock));
             strcpy(&pmsg[i][0], recv_chars(sock));
 
             if(strcmp(&pmsg[i][0], "\0") !=0 && strcmp(&pnames[i][0], "\0") !=0 )

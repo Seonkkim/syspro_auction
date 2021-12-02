@@ -57,12 +57,12 @@ int main(int argc, char *argv[])
 	for (int i = 0; i < n_clnts; i++) {
 		send_int(THREAD.clnts[i].sock, n_clnts);
 		send_int(THREAD.clnts[i].sock, i);	// clnt thr에 id전달
-
+        /*
 		for (int j = 0; j < n_clnts; j++) {
 			if (write(THREAD.clnts[i].sock, clnts[j].name, NAMESIZE) < 0)
 				perror("Writing to socket error");
 
-		}
+		}*/
 
 	}
 	for (int i = 0; i < n_clnts; i++) {
@@ -81,7 +81,7 @@ int main(int argc, char *argv[])
             //printf("thread: %s",THREAD.clnts[j].msg);
             if(strcmp(&THREAD.clnts[i].msg[0],"\0")) {
                 //printf("%s",THREAD.clnts[j].msg);
-
+                send_chars(THREAD.clnts[i].sock, THREAD.clnts[i].name);
                 send_chars(THREAD.clnts[i].sock, THREAD.clnts[i].msg);
                 printf("id %s said, %s\n", THREAD.clnts[i].name, THREAD.clnts[i].msg);
                 //strcpy(&THREAD.clnts[j].msg[0],"\0");
