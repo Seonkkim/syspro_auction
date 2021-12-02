@@ -45,9 +45,6 @@ int main(int argc, char *argv[]) {
         //pscores[i] = recv_int(sock);
         pnames[i] = (char *) malloc(sizeof(char) * NAMESIZE);
         pmsg[i] = (char *) malloc(sizeof(char) * MAX_MSG_LEN);
-        if (read(sock, &pnames[i][0], NAMESIZE) < 0)
-            perror("Reading from socket error");
-        printf("pname is %s\n", pnames[i]);
     }
 
     while (1) {
